@@ -1,7 +1,5 @@
-<?php
-include 'session_check.php';
-include 'db_params.php';
-?>
+<?php include 'db_params.php'; ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -20,22 +18,34 @@ include 'db_params.php';
     <label for="year">Filter by Year:</label>
     <input type="text" id="year" name="year" placeholder="Enter year">
 
-    <!-- Button to generate the pie chart -->
+    <!-- Button to generate the pie chart and show the table -->
     <button onclick="generatePieChart()">Generate Pie Chart</button>
 
     <!-- Placeholder for the pie chart -->
-    <div style="width: 80%; margin: 20px auto;">
-        <canvas id="pieChart"></canvas>
+    <div style="width: 35%; margin: 20px auto;">
+        <canvas id="pieChart" width="400" height="400"></canvas>
+    </div>
+
+    <!-- Table to display aggregated data (initially hidden) -->
+    <div id="tableContainer" style="display: none; text-align: center;">
+        <h2>Aggregated Data</h2>
+        <table border="1" style="margin: 0 auto;">
+            <tr>
+                <th>Category</th>
+                <th>Total</th>
+            </tr>
+            <tbody id="tableBody"></tbody>
+        </table>
     </div>
 
     <!-- Placeholder for error message -->
     <div id="errorMessage" style="color: red; margin-top: 10px;"></div>
 
-    <!--button to go home-->
-    <a href="upload.php"><button>Back</button></a>
+    <!-- Button to go back to upload page -->
+    <br><br><a href="upload.php"><button>Back to Upload Page</button></a>
 
     <script>
-        // Function to generate the pie chart
+        // Function to generate the pie chart and show the table
         function generatePieChart() {
             // Get the year value from the input
             var year = document.getElementById('year').value;
@@ -82,10 +92,30 @@ include 'db_params.php';
                                     }]
                                 }
                             });
+
+                            // Show the table container
+                            document.getElementById('tableContainer').style.display = 'block';
+
+                            // Update the table with aggregated data
+                            updateTable(data);
                         })
                         .catch(error => console.error('Error:', error));
                 })
                 .catch(error => console.error('Error:', error));
+        }
+
+        // Function to update the table with aggregated data
+        function updateTable(data) {
+            var tableBody = document.getElementById('tableBody');
+            tableBody.innerHTML = '';
+
+            data.forEach(item => {
+                var row = `<tr>
+                                <td>${item.category}</td>
+                                <td>${item.total}</td>
+                            </tr>`;
+                tableBody.innerHTML += row;
+            });
         }
     </script>
 </body>
