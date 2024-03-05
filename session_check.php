@@ -17,7 +17,12 @@ echo "Welcome, $username! You are logged in as $role.<br><br>";
 if ($role === 'admin') {
     echo '<button onclick="location.href=\'admin.php\'">Admin</button>';
     echo '<button onclick="location.href=\'edit_users.php\'">Edit Users</button>';
-    echo '<button onclick="location.href=\'edit_buckets.php\'">Edit Buckets</button><br><br>';
+    echo '<button onclick="location.href=\'edit_buckets.php\'">Edit Buckets</button>';
+    echo '<button onclick="location.href=\'edit_transactions.php\'">Edit Transactions</button><br><br>';
+    echo '<button onclick="location.href=\'upload.php\'">Home</button>';
+} else {
+    // Display regular user-specific buttons
+    echo '<button onclick="location.href=\'edit_transactions.php\'">Edit Transactions</button>';
+    echo '<button onclick="location.href=\'upload.php\'">Home</button><br><br>';
 }
-
 ?>

@@ -22,9 +22,9 @@
     ~~- Verify the file extension~~
     ~~- after success, rename the file extension to "file_name.imported"~~ - *Completed* - Brett
 
-2. The Transaction table must have Add, Edit, and Delete capabilities.
+2. ~~The Transaction table must have Add, Edit, and Delete capabilities.~~
 
-3. The Buckets Table must have Add, Edit, and Delete capabilities.
+3. ~~The Buckets Table must have Add, Edit, and Delete capabilities.~~
 
 4. ~~There must be a registeration page to allow users to register with a username and password~~
     ~~- Create a new DB called Users~~
@@ -32,7 +32,7 @@
     ~~- create a table called user. ~~
     ~~- user has 3 columns: username, password, approved(a boolean, 0 or 1).~~
     ~~- Only an Admin can approve(update) a user.~~ - *Completed* Brett
-    - User must have Add, Edit, and Delete capabilities.
+    - ~~User must have Add, Edit, and Delete capabilities.~~
     - Edge Case - username already exists.
 
 5. ~~Users must be logged in to access the web app. Each page except the Log-in and Registration page must have authentication.~~

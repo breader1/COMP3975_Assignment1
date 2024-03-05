@@ -101,8 +101,6 @@
         // Execute the prepared statement to insert data into the aggregated_data table
         $insertAggregatedDataStmt->execute();
 
-
-
         // Display success message or redirect to another page
         echo "File uploaded successfully!";
     } else {
