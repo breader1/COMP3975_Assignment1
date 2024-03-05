@@ -22,6 +22,7 @@ $createAdminTableStmt->execute();
 
 // Create the table if it doesn't exist
 $transactionsDb->exec('CREATE TABLE IF NOT EXISTS transactions (
+    transaction_id INTEGER PRIMARY KEY AUTOINCREMENT,
     transaction_date TEXT,
     description TEXT,
     debit REAL,
@@ -29,11 +30,14 @@ $transactionsDb->exec('CREATE TABLE IF NOT EXISTS transactions (
     balance REAL
 )');
 
-// Create the filters table
+
+// Create the filters table with an auto-incrementing id column
 $transactionsDb->exec('CREATE TABLE IF NOT EXISTS filters (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
     category TEXT,
     keyword TEXT
 )');
+
 
 // Create the buckets table
 $transactionsDb->exec('CREATE TABLE IF NOT EXISTS buckets (

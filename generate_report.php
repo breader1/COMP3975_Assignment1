@@ -21,6 +21,9 @@
     <!-- Button to generate the pie chart and show the table -->
     <button onclick="generatePieChart()">Generate Pie Chart</button>
 
+    <!-- button to clear the chart and regresh page -->
+    <button onclick="window.location.href='generate_report.php'">Clear Chart</button>
+
     <!-- Placeholder for the pie chart -->
     <div style="width: 35%; margin: 20px auto;">
         <canvas id="pieChart" width="400" height="400"></canvas>
@@ -28,7 +31,7 @@
 
     <!-- Table to display aggregated data (initially hidden) -->
     <div id="tableContainer" style="display: none; text-align: center;">
-        <h2>Aggregated Data</h2>
+        <h2>Annual Spending</h2>
         <table border="1" style="margin: 0 auto;">
             <tr>
                 <th>Category</th>

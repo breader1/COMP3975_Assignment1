@@ -1,8 +1,13 @@
 <?php
 include 'db_params.php';
 
-$query = "SELECT category, SUM(total) as total FROM aggregated_data GROUP BY category";
-$result = $transactionsDb->query($query);
+// Assuming $_GET['year'] is the parameter passed from the URL
+$selectedYear = isset($_GET['year']) ? $_GET['year'] : '';
+
+// Use a prepared statement to avoid SQL injection
+$query = $transactionsDb->prepare("SELECT category, SUM(total) as total FROM aggregated_data WHERE SUBSTR(transaction_date, 7, 4) = :year GROUP BY category");
+$query->bindParam(':year', $selectedYear, SQLITE3_TEXT);
+$result = $query->execute();
 
 $data = [];
 while ($row = $result->fetchArray(SQLITE3_ASSOC)) {
