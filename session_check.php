@@ -13,8 +13,11 @@ $role = isset($_SESSION['admin']) ? 'admin' : 'user';
 
 echo "Welcome, $username! You are logged in as $role.<br><br>";
 
-// Display admin button if the logged-in user is an admin
+// Display admin-specific buttons
 if ($role === 'admin') {
-    echo '<button onclick="location.href=\'admin.php\'">Admin</button><br><br>';
+    echo '<button onclick="location.href=\'admin.php\'">Admin</button>';
+    echo '<button onclick="location.href=\'edit_users.php\'">Edit Users</button>';
+    echo '<button onclick="location.href=\'edit_buckets.php\'">Edit Buckets</button><br><br>';
 }
+
 ?>
