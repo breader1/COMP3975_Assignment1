@@ -33,7 +33,7 @@
     ~~- user has 3 columns: username, password, approved(a boolean, 0 or 1).~~
     ~~- Only an Admin can approve(update) a user.~~ - *Completed* Brett
     - ~~User must have Add, Edit, and Delete capabilities.~~
-    - Edge Case - username already exists.
+    - ~~Edge Case - username already exists.~~
 
 5. ~~Users must be logged in to access the web app. Each page except the Log-in and Registration page must have authentication.~~
     ~~- Use session objects for this. We don't need cookies.~~ *Completed* - Brett
@@ -42,7 +42,7 @@
 
 7. ~~Add JSChart pie chart to show transactions filtered by year~~ *Completed* - Brett
 
-8. Once the above is complete, deploy the web app to Azure.
+8. ~~Once the above is complete, deploy the web app to Azure.~~
 
 ##
 
