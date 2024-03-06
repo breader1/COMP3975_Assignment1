@@ -1,10 +1,12 @@
 <?php
 include 'session_check.php'; // Include your session check code
 include 'db_params.php'; // Include your database connection code
+include 'header.php'; // Include your header code
 
 // Check if the admin is logged in
 if (!isset($_SESSION['admin'])) {
-    echo "Invalid admin credentials.";
+    echo'<br>';
+    echo '<div class="alert alert-danger" role="alert">Invalid admin credentials.</div>';
     exit();
 }
 
@@ -16,7 +18,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // Validate input (you might want to add more validation)
     if (empty($deleteCategory) || empty($deleteKeyword)) {
-        echo "Invalid category or keyword.";
+        echo'<br>';
+        echo '<div class="alert alert-danger" role="alert">Invalid category or keyword.</div>';
     } else {
         // Delete the filter
         $deleteFilterStmt = $transactionsDb->prepare("DELETE FROM filters WHERE category = :category AND keyword = :keyword");
@@ -24,11 +27,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $deleteFilterStmt->bindParam(':keyword', $deleteKeyword, SQLITE3_TEXT);
         $deleteFilterStmt->execute();
 
-        echo "Filter deleted successfully!";
-        echo "<br>redirecting...";
+        echo'<br>';
+        echo '<div class="alert alert-success" role="alert">Filter deleted successfully!<br>redirecting...</div>';
         header("refresh:2;url=edit_buckets.php");
     }
 } else {
-    echo "Invalid request.";
+    echo'<br>';
+    echo '<div class="alert alert-danger" role="alert">Invalid request.</div>';
 }
+    include 'footer.php'; // Include your footer code
 ?>

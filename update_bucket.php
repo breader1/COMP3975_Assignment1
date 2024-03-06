@@ -1,16 +1,17 @@
 <?php
 include 'session_check.php'; // Include your session check code
 include 'db_params.php'; // Include your database connection code
+include 'header.php'; // Include your header code
 
 // Check if the admin is logged in
 if (!isset($_SESSION['admin'])) {
-    echo "Invalid admin credentials.";
+    echo '<div class="alert alert-danger" role="alert">Invalid admin credentials.</div>';
     exit();
 }
 
 // Check if the category and keyword are provided in the query string
 if (!isset($_GET['category']) || !isset($_GET['keyword'])) {
-    echo "Category or keyword not provided.";
+    echo '<div class="alert alert-danger" role="alert">Category or keyword not provided.</div>';
     exit();
 }
 
@@ -26,7 +27,7 @@ $bucketDetails = $result->fetchArray(SQLITE3_ASSOC);
 
 // Check if the bucket exists
 if (!$bucketDetails) {
-    echo "Bucket not found.";
+    echo '<div class="alert alert-danger" role="alert">Bucket not found.</div>';
     exit();
 }
 
@@ -38,9 +39,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // Validate input
     if (empty($updatedCategory) || empty($updatedKeyword)) {
-        echo "Please enter both category and keyword.";
+        echo '<div class="alert alert-danger" role="alert">Please enter both category and keyword.</div>';
     } elseif (strlen($updatedCategory) > 30 || strlen($updatedKeyword) > 30) {
-        echo "Category and keyword must be 30 characters or less.";
+        echo '<div class="alert alert-danger" role="alert">Category and keyword must be 30 characters or less.</div>';
     } else {
         // Update data in the filters table for the specific row using the fetched details
         $updateBucketStmt = $transactionsDb->prepare('UPDATE filters SET keyword = :new_keyword WHERE id = :id');
@@ -48,8 +49,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $updateBucketStmt->bindParam(':id', $bucketDetails['id'], SQLITE3_INTEGER);
         $updateBucketStmt->execute();
 
-        echo "Bucket details updated successfully!";
-        echo "<br>redirecting...";
+        echo '<div class="alert alert-success" role="alert">Bucket details updated successfully!<br>redirecting...</div>';
         //return to previous page in 2 seconds
         header("refresh:2;url=edit_buckets.php");
     }
@@ -65,19 +65,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Update Bucket Details</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 </head>
 
 <body>
-    <h2>Update Bucket Details</h2>
-    <form action="" method="post">
-        <label for="new_category">New Category:</label>
-        <input type="text" id="new_category" name="new_category" value="<?php echo $bucketDetails['category']; ?>" readonly>
-        <br>
-        <label for="new_keyword">New Keyword:</label>
-        <input type="text" id="new_keyword" name="new_keyword" value="<?php echo $bucketDetails['keyword']; ?>" required>
-        <br>
-        <button type="submit">Update Bucket Details</button>
-    </form>
+    <div class="container mt-5">
+        <h2>Update Bucket Details</h2>
+        <form action="" method="post">
+            <div class="form-group">
+                <label for="new_category">New Category:</label>
+                <input type="text" class="form-control" id="new_category" name="new_category" value="<?php echo $bucketDetails['category']; ?>" readonly>
+            </div>
+            <div class="form-group">
+                <label for="new_keyword">New Keyword:</label>
+                <input type="text" class="form-control" id="new_keyword" name="new_keyword" value="<?php echo $bucketDetails['keyword']; ?>" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Update Bucket Details</button>
+        </form>
+    </div>
 </body>
 
 </html>

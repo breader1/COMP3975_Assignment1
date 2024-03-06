@@ -5,6 +5,12 @@ include 'session_check.php';
 // Include your database connection code
 include 'db_params.php';
 
+// Include your header code
+include 'header.php';
+
+// Include your footer code
+include 'footer.php';
+
 // Initialize the message variable
 $message = "";
 
@@ -15,7 +21,8 @@ if (isset($_GET['delete_transaction_id'])) {
 
     // Validate input (you might want to add more validation)
     if (empty($deleteTransactionId)) {
-        $message = "Please enter the transaction ID to delete.";
+        $message = '<div class="alert alert-success" role="alert">Please enter the transaction ID to delete.</div>';
+        echo $message;
     } else {
         // Check if the transaction ID exists
         $checkTransactionStmt = $transactionsDb->prepare('SELECT COUNT(*) FROM transactions WHERE transaction_id = :transaction_id');
@@ -29,15 +36,17 @@ if (isset($_GET['delete_transaction_id'])) {
             $deleteTransactionStmt->bindParam(':transaction_id', $deleteTransactionId, SQLITE3_TEXT);
             $deleteTransactionStmt->execute();
 
-            $message = "Transaction deleted successfully!";
-            echo $message;
-            $message = "<br>redirecting...";
+            $message = '<div class="alert alert-success" role="alert">Transaction deleted successfully!<br>redirecting...</div>';
             echo $message;
             header("refresh:2;url=edit_transactions.php");
             exit(); // Ensure that the script terminates after the redirect header
         } else {
-            $message = "Transaction ID does not exist.";
+            $message = '<div class="alert alert-danger" role="alert">Transaction ID does not exist.</div>';
+            echo $message;
         }
     }
+
+
 }
+
 ?>

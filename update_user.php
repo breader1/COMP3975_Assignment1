@@ -4,13 +4,13 @@ include 'db_params.php'; // Include your database connection code
 
 // Check if the admin is logged in
 if (!isset($_SESSION['admin'])) {
-    echo "Invalid admin credentials.";
+    echo '<div class="alert alert-danger" role="alert">Invalid admin credentials.</div>';
     exit();
 }
 
 // Check if the username is provided in the query string
 if (!isset($_GET['username'])) {
-    echo "Username not provided.";
+    echo '<div class="alert alert-warning" role="alert">Username not provided.</div>';
     exit();
 }
 
@@ -24,7 +24,7 @@ $userDetails = $result->fetchArray(SQLITE3_ASSOC);
 
 // Check if the user exists
 if (!$userDetails) {
-    echo "User not found.";
+    echo '<div class="alert alert-warning" role="alert">User not found.</div>';
     exit();
 }
 
@@ -36,7 +36,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // Validate username length
     if (strlen($updatedUsername) > 30) {
-        echo "Error: Username must be 30 characters or less.";
+        echo '<div class="alert alert-danger" role="alert">Error: Username must be 30 characters or less.</div>';
         header("refresh:2;url=edit_users.php");
         exit();
     }
@@ -47,7 +47,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         // Validate password length
         if (strlen($newPassword) > 30) {
-            echo "Error: Password must be 30 characters or less.";
+            echo '<div class="alert alert-danger" role="alert">Error: Password must be 30 characters or less.</div>';
             header("refresh:2;url=edit_users.php");
             exit();
         }
@@ -65,8 +65,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $updateUserStmt->bindParam(':username', $usernameToUpdate, SQLITE3_TEXT);
     $updateUserStmt->execute();
 
-    echo "User details updated successfully!";
-    echo "<br>redirecting...";
+    echo "<br>";
+    echo '<div class="alert alert-success" role="alert">User details updated successfully! Redirecting...</div>';
     //return to previous page in 2 seconds
     header("refresh:2;url=edit_users.php");
     
@@ -75,29 +75,30 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 // Display the user details and update form
 ?>
 
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Update User Details</title>
-</head>
+<?php include 'header.php'; ?>
 
 <body>
-    <h2>Update User Details</h2>
-    <form action="" method="post">
-        <label for="new_username">New Username:</label>
-        <input type="text" id="new_username" name="new_username" value="<?php echo $userDetails['username']; ?>" required>
-        <br>
-        <label for="new_password">New Password:</label>
-        <input type="password" id="new_password" name="new_password">
-        <br>
-        <label for="approve_user">Approve User:</label>
-        <input type="checkbox" id="approve_user" name="approve_user" <?php echo $userDetails['approved'] ? 'checked' : ''; ?>>
-        <br>
-        <button type="submit">Update User Details</button>
-    </form>
+    <div class="container">
+        <h2 class="mt-5">Update User Details</h2>
+        <form action="" method="post">
+            <div class="form-group">
+                <label for="new_username">New Username:</label>
+                <input type="text" class="form-control" id="new_username" name="new_username" value="<?php echo $userDetails['username']; ?>" required>
+            </div>
+            <div class="form-group">
+                <label for="new_password">New Password:</label>
+                <input type="password" class="form-control" id="new_password" name="new_password">
+            </div>
+            <div class="form-group form-check">
+                <input type="checkbox" class="form-check-input" id="approve_user" name="approve_user" <?php echo $userDetails['approved'] ? 'checked' : ''; ?>>
+                <label class="form-check-label" for="approve_user">Approve User</label>
+            </div>
+            <button type="submit" class="btn btn-primary">Update User Details</button>
+        </form>
+    </div>
 </body>
 
 </html>
+
+<?php include 'footer.php'; ?>
+

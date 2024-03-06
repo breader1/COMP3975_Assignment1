@@ -1,10 +1,12 @@
 <?php
 include 'db_params.php'; // Include your database connection code
 include 'session_check.php';
+include 'footer.php'; // Include your header file
 
 // Check if the admin is logged in
 if (!isset($_SESSION['admin'])) {
-    echo "Invalid admin credentials.";
+    echo '<br>';
+    echo '<div class="alert alert-danger" role="alert">Invalid admin credentials.</div>';
     exit();
 }
 
@@ -21,15 +23,23 @@ if (isset($_POST['approve_user'])) {
     $approveUserStmt->bindParam(':username', $userToApprove, SQLITE3_TEXT);
     $approveUserStmt->execute();
 
-    echo "<br><br>User '$userToApprove' approved by admin.";
+    echo '<br>';
+    echo '<div class="alert alert-success" role="alert">User \'' . htmlspecialchars($userToApprove) . '\' approved by admin.</div>';
+    header("refresh:2;url=admin.php");
+    exit(); // Stop script execution
+    
 } else {
     // Approve all users in the user table
     $approveAllUsersStmt = $usersDb->prepare("UPDATE user SET approved = 1 WHERE approved = 0");
     $approveAllUsersStmt->execute();
 
-    echo "All users approved by admin.";
+    echo '<br>';
+    echo '<div class="alert alert-success" role="alert">All users approved by admin.</div>';
+    header("refresh:2;url=admin.php");
+    exit(); // Stop script execution
 }
 
 // Close the users database connection
 $usersDb->close();
+
 ?>

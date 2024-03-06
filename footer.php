@@ -1,8 +1,20 @@
-<?php
-//footer that contains name of the author and their student id
-echo '<footer>';
-echo '<p> Brett Reader - A00986127 </p>';
-echo '<p>Kyoungran (Ran) Park - A01331544</p>';
-echo '<button onclick="window.location.href=\'logout.php\'">Logout</button>';
-echo '</footer>';
-?>
+
+<style>
+    footer {
+        height: 90px; 
+    }
+</style>
+<footer class="fixed-bottom bg-light p-3">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <p> Brett Reader - A00986127 </p>
+                <p>Kyoungran (Ran) Park - A01331544</p>
+            </div>
+            <div class="col-md-6 text-right">
+                <button class="btn btn-danger" onclick="window.location.href='logout.php'">Logout</button>
+            </div>
+        </div>
+    </div>
+</footer>
+

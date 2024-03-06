@@ -1,5 +1,6 @@
 <?php
 include 'db_params.php'; // Include your database connection code
+include 'header.php'; // Include your header code
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Get user input
@@ -12,28 +13,31 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $insertUserStmt->bindParam(':password', $password);
     $insertUserStmt->execute();
 
-    echo "Registration successful. Waiting for admin approval.";
-    echo "<br><br>Redirecting to home page...";
-    //rediect to home page after 2 seconds
+    echo '<div class="container mt-5">';
+    echo '<div class="alert alert-success" role="alert">';
+    echo '<h4 class="alert-heading">Registration successful!</h4>';
+    echo '<p>Thank you for registering. Your account is pending admin approval.</p>';
+    echo '<hr>';
+    echo '<p class="mb-0">Redirecting to home page...</p>';
+    echo '</div>';
+    echo '</div>';
+
+    // Redirect to home page after 3 seconds
     header('Refresh: 3; URL=index.php');
 }
 ?>
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>User Registration</title>
-</head>
-<body>
-    <h2>User Registration</h2>
-    <form action="register.php" method="post">
-        <label for="username">Username:</label>
-        <input type="text" name="username" required><br>
-        <label for="password">Password:</label>
-        <input type="password" name="password" required><br>
-        <button type="submit">Register</button>
+<div class="container">
+    <h2 class="mt-5">User Registration</h2>
+    <form class="mt-3" action="register.php" method="post">
+        <div class="form-group">
+            <label for="username">Username:</label>
+            <input type="text" class="form-control" name="username" required>
+        </div>
+        <div class="form-group">
+            <label for="password">Password:</label>
+            <input type="password" class="form-control" name="password" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Register</button>
     </form>
-</body>
-</html>
+</div>

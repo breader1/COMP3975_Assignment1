@@ -1,5 +1,6 @@
 <?php
 include 'db_params.php'; // Include your database connection code
+include 'header.php'; // Include your header file
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Get user input
@@ -37,18 +38,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 exit();
             } elseif ($approvalStatus == 0) {
                 // User has not been approved
-                echo "Your registration is pending approval. Please wait for admin approval.";
-                
+                echo '<br>';
+                echo '<div class="alert alert-warning" role="alert">Your registration is pending approval. Please wait for admin approval.</div>';
                 //button to go back to index page
-                echo "<br><br><button onclick='window.location.href=\"index.php\"'>Back</button>";
-                
+                echo '<br><button onclick="window.location.href=\'index.php\'" class="btn btn-primary">Back</button>';
                 exit();
             }
         }
     }
 
     // Invalid login credentials
-    echo "Invalid login credentials.";
+    echo '<div class="alert alert-danger" role="alert">Invalid login credentials.</div>';
 }
 ?>
 
@@ -62,14 +62,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </head>
 
 <body>
-    <h2>Login</h2>
-    <form action="login.php" method="post">
-        <label for="username">Username:</label>
-        <input type="text" id="username" name="username" required><br>
-        <label for="password">Password:</label>
-        <input type="password" id="password" name="password" required><br>
-        <button type="submit">Log In</button>
-    </form>
+    <div class="container mt-5">
+        <h2>Login</h2>
+        <form action="login.php" method="post">
+            <div class="form-group">
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" class="form-control" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Log In</button>
+        </form>
+    </div>
 </body>
 
 </html>
+
+<?php include 'footer.php'; ?>

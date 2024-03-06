@@ -5,6 +5,13 @@ include 'session_check.php';
 // Include your database connection code
 include 'db_params.php';
 
+// Include your header code
+include 'header.php';
+
+// Initialize the message variable
+$message = "";
+
+
 // Check if the form is submitted
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Get user input
@@ -14,7 +21,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // Validate input (you might want to add more validation)
     if (empty($transactionId) || empty($amount) || empty($description)) {
-        echo "Please enter all required fields.";
+        $message = '<br><div class="alert alert-danger" role="alert">Please enter all required fields.</div>';
     } else {
         // Check if the transaction ID exists
         $checkTransactionStmt = $transactionsDb->prepare('SELECT COUNT(*) FROM transactions WHERE transaction_id = :transaction_id');
@@ -30,8 +37,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $updateTransactionStmt->bindParam(':transaction_id', $transactionId, SQLITE3_TEXT);
             $updateTransactionStmt->execute();
 
-            echo "Transaction details updated successfully!";
-            echo "<br>redirecting...";
+            $message = '<br><div class="alert alert-success" role="alert">Transaction details updated successfully!<br>redirecting...</div>';
             header("refresh:2;url=edit_transactions.php");
         } else {
             echo "Transaction ID does not exist.";
@@ -44,12 +50,17 @@ $getAllTransactionsStmt = $transactionsDb->prepare('SELECT transaction_id, trans
 $result = $getAllTransactionsStmt->execute();
 
 // Start building the table
-echo '<h2>Edit Transactions</h2>';
+echo '<div class="container mt-4">';
+echo '<h2>Transactions</h2>';
 
 // Insert Transaction button that redirects to insert_transaction.php
-echo '<button onclick="location.href=\'insert_transaction.php\'">Insert Transaction</button>';
+echo '<button onclick="location.href=\'insert_transaction.php\'" class="btn btn-primary">Insert Transaction</button>';
 echo '<br><br>';
-echo '<table border="1">';
+echo '</div>'; // Close the container div
+
+echo '<div class="container" style="max-height: 500px; overflow-y: auto;">'; // Set max-height and overflow-y for vertical scrolling
+echo '<table class="table">';
+echo '<thead class="thead-dark">';
 echo '<tr>';
 echo '<th>Transaction ID</th>';
 echo '<th>Transaction Date</th>';
@@ -59,27 +70,38 @@ echo '<th>Credit</th>';
 echo '<th>Balance</th>';
 echo '<th>Actions</th>'; // New column for actions
 echo '</tr>';
+echo '</thead>';
+echo '<tbody>';
 
 // Loop through the results and display each transaction in a table row
-while ($row = $result->fetchArray(SQLITE3_ASSOC)) {
-    echo '<tr>';
-    echo '<td>' . $row['transaction_id'] . '</td>';
-    echo '<td>' . $row['transaction_date'] . '</td>';
-    echo '<td>' . $row['description'] . '</td>';
-    echo '<td>' . $row['debit'] . '</td>';
-    echo '<td>' . $row['credit'] . '</td>';
-    echo '<td>' . $row['balance'] . '</td>';
-    echo '<td>';
-    echo '<a href="update_transaction.php?transaction_id=' . $row['transaction_id'] . '">Update</a>'; // Link to update_transaction.php
-    echo ' | ';
-    echo '<a href="delete_transaction.php?delete_transaction_id=' . $row['transaction_id'] . '">Delete</a>';
-    echo '</td>';
-    echo '</tr>';
+if ($result) {
+    while ($row = $result->fetchArray(SQLITE3_ASSOC)) {
+        echo '<tr>';
+        echo '<td>' . $row['transaction_id'] . '</td>';
+        echo '<td>' . $row['transaction_date'] . '</td>';
+        echo '<td>' . $row['description'] . '</td>';
+        echo '<td>' . $row['debit'] . '</td>';
+        echo '<td>' . $row['credit'] . '</td>';
+        echo '<td>' . $row['balance'] . '</td>';
+        echo '<td>';
+        echo '<a href="update_transaction.php?transaction_id=' . $row['transaction_id'] . '" class="btn btn-primary">Update</a>'; // Link to update_transaction.php
+        echo ' ';
+        echo '<a href="delete_transaction.php?delete_transaction_id=' . $row['transaction_id'] . '" class="btn btn-danger">Delete</a>';
+        echo '</td>';
+        echo '</tr>';
+    }
+} else {
+    echo '<tr><td colspan="7">No transactions found.</td></tr>';
 }
 
-// Finish the table
+echo '</tbody>';
 echo '</table>';
+
+echo $message;
 
 // End output buffering and flush the buffer
 ob_end_flush();
-?>
+
+// Include your footer code
+include 'footer.php';
+echo '</div>'; // Close the container

@@ -1,7 +1,15 @@
 <?php
+include 'header.php'; // Include your header file
 include 'session_check.php'; // Include your session check code
 include 'db_params.php'; // Include your database connection code
-echo '<br><button onclick="window.location.href=\'upload.php\'">Go to Upload Page</button><br><br>';
-include 'display_waiting_users.php'; // Include your user display code
-include 'footer.php'; // Include your footer code
 ?>
+
+<div class="container mt-4"> <!-- Add margin-top -->
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <?php include 'display_waiting_users.php'; // Include your user display code ?>
+        </div>
+    </div>
+</div>
+
+<?php include 'footer.php'; ?>
