@@ -1,4 +1,5 @@
 <?php
+ob_start();
 include 'db_params.php';
 
 // Query to get distinct transaction dates from the aggregated_data table
@@ -10,8 +11,8 @@ $availableYears = [];
 while ($row = $result->fetchArray(SQLITE3_ASSOC)) {
     $availableYears[] = $row['year'];
 }
-
 // Return the available years as JSON
 header('Content-Type: application/json');
 echo json_encode($availableYears);
 ?>
+<?php ob_end_flush(); ?>

@@ -1,5 +1,5 @@
 <?php
-
+ob_start();
 $transactionsDatabaseFile = 'Transactions.db';
 $usersDatabaseFile = 'Users.db';
 
@@ -76,4 +76,5 @@ if ($count == 0) {
 } else {
     //echo "Admin record already exists.";
 }
+ob_end_flush();
 ?>

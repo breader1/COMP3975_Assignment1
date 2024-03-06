@@ -1,4 +1,5 @@
 <?php
+ob_start();
 include 'db_params.php'; // Include your database connection code
 include 'header.php'; // Include your header code
 
@@ -41,3 +42,4 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <button type="submit" class="btn btn-primary">Register</button>
     </form>
 </div>
+<?php ob_end_flush(); ?>

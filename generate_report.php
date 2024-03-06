@@ -1,4 +1,5 @@
 <?php
+ob_start();
 include 'header.php'; // Include your header file
 include 'session_check.php'; // Include your session check code
 include 'db_params.php'; // Include your database connection code
@@ -9,6 +10,7 @@ if (!isset($_SESSION['admin'])) {
     exit();
 }
 ?>
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -64,7 +66,7 @@ if (!isset($_SESSION['admin'])) {
                 </div>
             </div>
         </div>
-        
+
         <!-- Placeholder for error message -->
         <div id="errorMessage" class="text-danger mt-4"></div>
     </div>
@@ -144,5 +146,10 @@ if (!isset($_SESSION['admin'])) {
         }
     </script>
 </body>
-<?php  include 'footer.php'; // Include your footer file ?>
+
+<?php
+ob_end_flush();
+include 'footer.php'; // Include your footer file
+?>
+
 </html>

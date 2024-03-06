@@ -1,4 +1,5 @@
 <?php
+ob_start();
 include 'db_params.php'; // Include your database connection code
 include 'header.php'; // Include your header file
 
@@ -79,5 +80,4 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </body>
 
 </html>
-
-<?php include 'footer.php'; ?>
+<?php ob_end_flush(); ?>

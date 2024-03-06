@@ -1,4 +1,5 @@
     <?php
+    ob_start();
     // Include your session check code
     include 'session_check.php';
 
@@ -135,3 +136,4 @@
         <?php echo $message; ?>
     </div>
     <?php include 'footer.php'; ?>
+    <?php ob_end_flush(); ?>

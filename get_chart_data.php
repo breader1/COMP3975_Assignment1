@@ -1,4 +1,5 @@
 <?php
+ob_start();
 include 'db_params.php';
 
 // Assuming $_GET['year'] is the parameter passed from the URL
@@ -16,3 +17,4 @@ while ($row = $result->fetchArray(SQLITE3_ASSOC)) {
 
 echo json_encode($data);
 ?>
+<?php ob_end_flush(); ?>

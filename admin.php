@@ -1,4 +1,5 @@
 <?php
+ob_start();
 include 'header.php'; // Include your header file
 include 'session_check.php'; // Include your session check code
 include 'db_params.php'; // Include your database connection code
@@ -13,3 +14,4 @@ include 'db_params.php'; // Include your database connection code
 </div>
 
 <?php include 'footer.php'; ?>
+<?php ob_end_flush(); ?>
