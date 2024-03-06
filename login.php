@@ -20,7 +20,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $resultUser = $checkUserStmt->execute();
     $rowUser = $resultUser->fetchArray(SQLITE3_ASSOC);
 
-    if ($rowAdmin !== false) {
+    if ($enteredUsername === $adminUsername && $enteredPassword === $adminPassword) {
         // Admin login successful
         session_start();
         $_SESSION['admin'] = $enteredUsername;
