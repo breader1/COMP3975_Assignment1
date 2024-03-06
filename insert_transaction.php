@@ -1,5 +1,5 @@
+    <?php ob_start(); ?>
     <?php
-    ob_start();
     // Include your session check code
     include 'session_check.php';
 
