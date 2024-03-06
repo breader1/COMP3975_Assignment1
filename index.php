@@ -5,13 +5,6 @@ session_destroy();
 include 'db_params.php'; // Include your database connection code
 include 'header.php'; // Include your header code
 
-//drop all the tables in transaction.db
-$transactionsDb->exec("DROP TABLE IF EXISTS transactions");
-$transactionsDb->exec("DROP TABLE IF EXISTS filters");
-$transactionsDb->exec("DROP TABLE IF EXISTS buckets");
-$transactionsDb->exec("DROP TABLE IF EXISTS reports");
-$transactionsDb->exec("DROP TABLE IF EXISTS aggregated_data");
-
 $usersDb->exec("CREATE TABLE IF NOT EXISTS user (
     username TEXT PRIMARY KEY,
     password TEXT,
