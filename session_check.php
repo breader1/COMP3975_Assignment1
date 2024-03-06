@@ -1,6 +1,6 @@
+<?php ob_start();
+session_start();?>
 <?php
-ob_start();
-session_start();
 
 // Check if any user is logged in
 if (!isset($_SESSION['user']) && !isset($_SESSION['admin'])) {
