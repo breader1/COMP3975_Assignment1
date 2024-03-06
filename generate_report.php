@@ -3,12 +3,6 @@ ob_start();
 include 'header.php'; // Include your header file
 include 'session_check.php'; // Include your session check code
 include 'db_params.php'; // Include your database connection code
-
-// Check if the admin is logged in
-if (!isset($_SESSION['admin'])) {
-    echo '<div class="alert alert-danger" role="alert">Invalid admin credentials.</div>';
-    exit();
-}
 ?>
 
 <head>
