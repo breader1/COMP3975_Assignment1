@@ -1,4 +1,5 @@
 <?php
+ob_start();
 include 'session_check.php'; // Include your session check code
 include 'db_params.php'; // Include your database connection code
 include 'header.php'; // Include your header code
@@ -86,3 +87,4 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </body>
 
 </html>
+<?php ob_end_flush() ?>

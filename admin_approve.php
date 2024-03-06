@@ -1,3 +1,4 @@
+<?php ob_start(); ?>
 <?php
 include 'session_check.php';
 // Assuming you have already established a connection to the users database
@@ -28,3 +29,4 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 // Close the users database connection
 $usersDb->close();
 ?>
+<?php ob_end_flush(); ?>

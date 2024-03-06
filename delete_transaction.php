@@ -1,3 +1,4 @@
+<?php ob_start(); ?>
 <?php
 // Include your session check code
 include 'session_check.php';
@@ -50,3 +51,4 @@ if (isset($_GET['delete_transaction_id'])) {
 }
 
 ?>
+<?php ob_end_flush(); ?>

@@ -1,3 +1,4 @@
+<?php ob_start(); ?>
 <?php include 'session_check.php'; ?>
 <?php include 'header.php'; ?>
 <!DOCTYPE html>
@@ -124,3 +125,4 @@
 </body>
 
 </html>
+<?php ob_end_flush(); ?>

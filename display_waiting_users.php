@@ -1,4 +1,5 @@
 <?php
+ob_start();
 include 'db_params.php';
 
 echo '<div class="container mt-4">'; // Add margin-top and start container
@@ -52,4 +53,5 @@ echo '</div>'; // Close the container div
 // Close the users database connection
 $usersDb->close();
 ?>
+<?php ob_end_flush(); ?>
 <?php include 'footer.php'; ?>

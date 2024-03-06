@@ -1,4 +1,5 @@
 <?php
+ob_start();
 session_start();
 
 // Check if any user is logged in
@@ -97,3 +98,4 @@ $role = isset($_SESSION['admin']) ? 'admin' : 'user';
     <!-- Rest of the body content will go here, including your forms and other UI elements -->
 </body>
 </html>
+<?php ob_end_flush(); ?>

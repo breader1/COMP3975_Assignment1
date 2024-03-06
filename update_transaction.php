@@ -1,4 +1,5 @@
 <?php
+ob_start();
 // Include your session check code
 include 'session_check.php';
 
@@ -34,7 +35,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $latestBalance = $result->fetchArray(SQLITE3_NUM)[0];
 
             // Calculate the new balance
-            $balance = $latestBalance - $debit + $credit/2; //for whatever reason credit was doubling
+            $balance = $latestBalance - $debit + $credit / 2; //for whatever reason credit was doubling
 
             // Update transaction data in the transactions table
             $updateTransactionStmt = $transactionsDb->prepare("UPDATE transactions SET description = :description, debit = :debit, credit = :credit, balance = :balance WHERE transaction_id = :transaction_id");
@@ -119,27 +120,33 @@ if (isset($_GET['transaction_id'])) {
             <input type="hidden" name="transaction_id" value="<?php echo $transactionDetails['transaction_id']; ?>">
             <div class="form-group">
                 <label for="description">Description:</label>
-                <input type="text" id="description" name="description" value="<?php echo $transactionDetails['description']; ?>" class="form-control" required>
+                <input type="text" id="description" name="description"
+                    value="<?php echo $transactionDetails['description']; ?>" class="form-control" required>
             </div>
             <div class="form-group">
                 <label for="debit">Debit:</label>
-                <input type="text" id="debit" name="debit" value="<?php echo $transactionDetails['debit']; ?>" class="form-control" required>
+                <input type="text" id="debit" name="debit" value="<?php echo $transactionDetails['debit']; ?>"
+                    class="form-control" required>
             </div>
             <div class="form-group">
                 <label for="credit">Credit:</label>
-                <input type="text" id="credit" name="credit" value="<?php echo $transactionDetails['credit']; ?>" class="form-control" required>
+                <input type="text" id="credit" name="credit" value="<?php echo $transactionDetails['credit']; ?>"
+                    class="form-control" required>
             </div>
             <br><br>
             <button type="submit" class="btn btn-primary btn-block">Update Transaction</button>
         </form>
         <br><br>
-        <button onclick="location.href='edit_transactions.php'" class="btn btn-secondary btn-block">Back to Transactions</button>
+        <button onclick="location.href='edit_transactions.php'" class="btn btn-secondary btn-block">Back to
+            Transactions</button>
     </div>
     <?php
     exit;
 }
 
 echo $message;
+
+ob_end_flush();
 
 //include footer
 include 'footer.php';

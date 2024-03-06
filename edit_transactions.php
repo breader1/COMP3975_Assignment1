@@ -1,4 +1,5 @@
 <?php
+ob_start();
 // Include your session check code
 include 'session_check.php';
 
@@ -105,3 +106,4 @@ ob_end_flush();
 // Include your footer code
 include 'footer.php';
 echo '</div>'; // Close the container
+?>

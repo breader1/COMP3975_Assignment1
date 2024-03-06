@@ -1,4 +1,5 @@
 <?php
+ob_start();
 session_start();
 session_destroy();
 include 'db_params.php'; // Include your database connection code
@@ -25,3 +26,4 @@ $usersDb->exec("CREATE TABLE IF NOT EXISTS user (
 </body>
 
 </html>
+<?php ob_end_flush(); ?>

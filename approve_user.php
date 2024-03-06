@@ -1,4 +1,5 @@
 <?php
+ob_start();
 include 'db_params.php'; // Include your database connection code
 include 'session_check.php';
 include 'footer.php'; // Include your header file
@@ -27,19 +28,19 @@ if (isset($_POST['approve_user'])) {
     echo '<div class="alert alert-success" role="alert">User \'' . htmlspecialchars($userToApprove) . '\' approved by admin.</div>';
     header("refresh:2;url=admin.php");
     exit(); // Stop script execution
-    
+
 } else {
     // Approve all users in the user table
     $approveAllUsersStmt = $usersDb->prepare("UPDATE user SET approved = 1 WHERE approved = 0");
     $approveAllUsersStmt->execute();
 
+    // Close the users database connection
+    $usersDb->close();
+
     echo '<br>';
     echo '<div class="alert alert-success" role="alert">All users approved by admin.</div>';
+    ob_end_flush();
     header("refresh:2;url=admin.php");
     exit(); // Stop script execution
 }
-
-// Close the users database connection
-$usersDb->close();
-
 ?>
