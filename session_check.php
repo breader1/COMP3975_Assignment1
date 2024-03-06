@@ -98,3 +98,4 @@ $role = isset($_SESSION['admin']) ? 'admin' : 'user';
     <!-- Rest of the body content will go here, including your forms and other UI elements -->
 </body>
 </html>
+<?php ob_end_flush(); ?>
