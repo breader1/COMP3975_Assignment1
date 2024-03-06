@@ -46,6 +46,15 @@
             // Close the CSV file
             fclose($csvFile);
 
+            // Get the original filename
+            $originalFilename = $_FILES['csv_file']['name'];
+
+            // Append ".imported" to the original filename
+            $newFilename = pathinfo($originalFilename, PATHINFO_FILENAME) . '.imported' . '.' . pathinfo($originalFilename, PATHINFO_EXTENSION);
+
+            // Rename the file
+            rename($tmpFileName, $newFilename);
+                
             // Define categories and corresponding keywords
             $categoriesAndKeywords = [
                 'Groceries' => ['SAFEWAY', 'REAL CDN SUPERS', 'WALMART', 'COSTCO WHOLESAL',],

@@ -85,13 +85,12 @@ $role = isset($_SESSION['admin']) ? 'admin' : 'user';
                 <button class="btn btn-primary mr-2" onclick="location.href='edit_users.php'">View Users</button>
                 <button class="btn btn-primary mr-2" onclick="location.href='edit_buckets.php'">View Buckets</button>
                 <button class="btn btn-primary mr-2" onclick="location.href='edit_transactions.php'">View Transactions</button>
-                <button class="btn btn-primary mr-2" onclick="location.href='/edit_transactions.php'">View Transactions Test</button>
                 <button class="btn btn-primary" onclick="location.href='upload.php'">Home</button>
             </div>
             </div>
         <?php else: ?>
             <div class="nav-buttons">
-                <button class="btn btn-primary mr-2" onclick="location.href='/edit_transactions.php'">View Transactions</button>
+                <button class="btn btn-primary mr-2" onclick="location.href='edit_transactions.php'">View Transactions</button>
                 <button class="btn btn-primary" onclick="location.href='upload.php'">Home</button>
             </div>
         <?php endif; ?>
