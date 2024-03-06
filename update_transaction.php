@@ -92,8 +92,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             if (!$insertAggregatedDataStmt->execute()) {
                 die("<div class='alert alert-danger' role='alert'>Error inserting into aggregated_data: " . $transactionsDb->lastErrorMsg() . "</div>");
             }
-            echo "<div class='alert alert-success' role='alert'>Transaction details updated successfully!</div>";
-            echo "<br>redirecting...";
+            echo "<div class='alert alert-success' role='alert'>Transaction details updated successfully!<br>redirecting...</div>";
             header("refresh:2;url=edit_transactions.php");
         } else {
             echo "<div class='alert alert-danger' role='alert'>Transaction ID does not exist.</div>";

@@ -38,12 +38,6 @@ if (!isset($_SESSION['admin'])) {
                 <!-- Button to generate the pie chart -->
                 <button class="btn btn-primary mb-3" onclick="generatePieChart()">Generate Pie Chart</button>
             </div>
-
-            <div class="col-md-6 text-right">
-                <div class="mt-4">
-                    <a href="upload.php" class="btn btn-secondary">Back to Upload Page</a>
-                </div>
-            </div>
         </div>
 
         <div class="row justify-content-center">

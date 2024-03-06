@@ -15,12 +15,12 @@ if (!isset($_SESSION['admin'])) {
 $getAllUsersStmt = $usersDb->prepare('SELECT username, approved FROM user');
 $result = $getAllUsersStmt->execute();
 
-// Start building the table
 echo '<div class="container">';
 echo '<h2 class="my-4">Users</h2>';
 
 // Insert User button that redirects to insert_user.php
 echo '<a class="btn btn-primary mb-3" href="insert_user.php">Insert User</a>';
+echo '<div class="table-responsive" style="max-height: 500px; overflow-y: auto;">'; // Set max-height and overflow-y for vertical scrolling
 echo '<table class="table table-bordered">';
 echo '<thead class="thead-dark">';
 echo '<tr>';

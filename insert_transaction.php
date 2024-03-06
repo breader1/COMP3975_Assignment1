@@ -120,11 +120,11 @@
             </div>
             <div class="form-group">
                 <label for="debit">Debit:</label>
-                <input type="text" class="form-control" id="debit" name="debit">
+                <input type="text" class="form-control" id="debit" name="debit" required>
             </div>
             <div class="form-group">
                 <label for="credit">Credit:</label>
-                <input type="text" class="form-control" id="credit" name="credit">
+                <input type="text" class="form-control" id="credit" name="credit" required>
             </div>
             <button type="submit" class="btn btn-primary btn-block">Insert Transaction</button>
         </form>

@@ -98,6 +98,7 @@ echo '<h2>Buckets</h2>';
 // Insert Filter button that redirects to insert_filter.php
 echo '<button class="btn btn-primary" onclick="location.href=\'insert_bucket.php\'">Insert Bucket</button>';
 echo '<br><br>';
+echo '<div class="table-responsive" style="max-height: 500px; overflow-y: auto;">'; // Set max-height and overflow-y for vertical scrolling
 echo '<table class="table table-bordered">';
 echo '<thead class="thead-dark">';
 echo '<tr>';

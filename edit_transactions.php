@@ -56,6 +56,9 @@ echo '<h2>Transactions</h2>';
 // Insert Transaction button that redirects to insert_transaction.php
 echo '<button onclick="location.href=\'insert_transaction.php\'" class="btn btn-primary">Insert Transaction</button>';
 echo '<br><br>';
+echo '</div>'; // Close the container div
+
+echo '<div class="container" style="max-height: 500px; overflow-y: auto;">'; // Set max-height and overflow-y for vertical scrolling
 echo '<table class="table">';
 echo '<thead class="thead-dark">';
 echo '<tr>';
