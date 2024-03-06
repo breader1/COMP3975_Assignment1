@@ -1,51 +1,79 @@
-<?php include 'db_params.php'; ?>
+<?php
+include 'header.php'; // Include your header file
+include 'session_check.php'; // Include your session check code
+include 'db_params.php'; // Include your database connection code
 
-<!DOCTYPE html>
-<html lang="en">
-
+// Check if the admin is logged in
+if (!isset($_SESSION['admin'])) {
+    echo '<div class="alert alert-danger" role="alert">Invalid admin credentials.</div>';
+    exit();
+}
+?>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Generate Report</title>
     <!-- Include Chart.js library -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        #pieChart {
+            width: 400px !important;
+            height: 400px !important;
+        }
+    </style>
 </head>
 
 <body>
-    <h1>Generate Report</h1>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <h1>Generate Report</h1>
 
-    <!-- Filter by Year -->
-    <label for="year">Filter by Year:</label>
-    <input type="text" id="year" name="year" placeholder="Enter year">
+                <!-- Filter by Year -->
+                <div class="form-group">
+                    <label for="year">Filter by Year:</label>
+                    <input type="text" id="year" name="year" class="form-control" placeholder="Enter year">
+                </div>
 
-    <!-- Button to generate the pie chart and show the table -->
-    <button onclick="generatePieChart()">Generate Pie Chart</button>
+                <!-- Button to generate the pie chart -->
+                <button class="btn btn-primary mb-3" onclick="generatePieChart()">Generate Pie Chart</button>
+            </div>
 
-    <!-- button to clear the chart and regresh page -->
-    <button onclick="window.location.href='generate_report.php'">Clear Chart</button>
+            <div class="col-md-6 text-right">
+                <div class="mt-4">
+                    <a href="upload.php" class="btn btn-secondary">Back to Upload Page</a>
+                </div>
+            </div>
+        </div>
 
-    <!-- Placeholder for the pie chart -->
-    <div style="width: 35%; margin: 20px auto;">
-        <canvas id="pieChart" width="400" height="400"></canvas>
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <!-- Canvas for pie chart -->
+                <div class="text-center">
+                    <canvas id="pieChart"></canvas>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <!-- Table to display aggregated data (initially hidden) -->
+                <div id="tableContainer" class="mt-4" style="display: none;">
+                    <h2 class="text-center">Aggregated Data</h2>
+                    <table class="table table-bordered">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th>Category</th>
+                                <th>Total</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tableBody"></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Placeholder for error message -->
+        <div id="errorMessage" class="text-danger mt-4"></div>
     </div>
-
-    <!-- Table to display aggregated data (initially hidden) -->
-    <div id="tableContainer" style="display: none; text-align: center;">
-        <h2>Annual Spending</h2>
-        <table border="1" style="margin: 0 auto;">
-            <tr>
-                <th>Category</th>
-                <th>Total</th>
-            </tr>
-            <tbody id="tableBody"></tbody>
-        </table>
-    </div>
-
-    <!-- Placeholder for error message -->
-    <div id="errorMessage" style="color: red; margin-top: 10px;"></div>
-
-    <!-- Button to go back to upload page -->
-    <br><br><a href="upload.php"><button>Back to Upload Page</button></a>
 
     <script>
         // Function to generate the pie chart and show the table
@@ -122,5 +150,5 @@
         }
     </script>
 </body>
-
+<?php  include 'footer.php'; // Include your footer file ?>
 </html>

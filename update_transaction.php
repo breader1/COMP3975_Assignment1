@@ -5,6 +5,9 @@ include 'session_check.php';
 // Include your database connection code
 include 'db_params.php';
 
+// Initialize the message variable
+$message = "";
+
 // Check if the form is submitted
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Get user input
@@ -15,7 +18,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // Validate input (you might want to add more validation)
     if (empty($transactionId) || empty($description)) {
-        echo "Please enter all required fields.";
+        echo '<div class="alert alert-danger" role="alert">Please enter all required fields.</div>';
     } else {
         // Check if the transaction ID exists
         $checkTransactionStmt = $transactionsDb->prepare('SELECT COUNT(*) FROM transactions WHERE transaction_id = :transaction_id');
@@ -53,7 +56,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             JOIN filters f ON LOWER(t.description) LIKE '%' || f.keyword || '%'");
 
             if (!$insertBucketStmt->execute()) {
-                die("Error inserting into buckets: " . $transactionsDb->lastErrorMsg());
+                die("<div class='alert alert-danger' role='alert'>Error inserting into buckets: " . $transactionsDb->lastErrorMsg() . "</div>");
             }
 
             // Truncate the reports table
@@ -71,7 +74,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             GROUP BY category");
 
             if (!$insertReportStmt->execute()) {
-                die("Error inserting into reports: " . $transactionsDb->lastErrorMsg());
+                die("<div class='alert alert-danger' role='alert'>Error inserting into reports: " . $transactionsDb->lastErrorMsg() . "</div>");
             }
 
             // Truncate the aggregated_data table
@@ -87,13 +90,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             GROUP BY b.category, t.transaction_date");
 
             if (!$insertAggregatedDataStmt->execute()) {
-                die("Error inserting into aggregated_data: " . $transactionsDb->lastErrorMsg());
+                die("<div class='alert alert-danger' role='alert'>Error inserting into aggregated_data: " . $transactionsDb->lastErrorMsg() . "</div>");
             }
-            echo "Transaction details updated successfully!";
+            echo "<div class='alert alert-success' role='alert'>Transaction details updated successfully!</div>";
             echo "<br>redirecting...";
             header("refresh:2;url=edit_transactions.php");
         } else {
-            echo "Transaction ID does not exist.";
+            echo "<div class='alert alert-danger' role='alert'>Transaction ID does not exist.</div>";
         }
     }
 }
@@ -109,22 +112,36 @@ if (isset($_GET['transaction_id'])) {
     $transactionDetails = $result->fetchArray(SQLITE3_ASSOC);
 
     // Display the form for updating the transaction
-    echo '<h2>Update Transaction</h2>';
-    echo '<form action="update_transaction.php" method="post">';
-    echo '  <input type="hidden" name="transaction_id" value="' . $transactionDetails['transaction_id'] . '">';
-    echo '  <label for="description">Description:</label>';
-    echo '  <input type="text" id="description" name="description" value="' . $transactionDetails['description'] . '" required><br>';
-    echo '  <label for="debit">Debit:</label>';
-    echo '  <input type="text" id="debit" name="debit" value="' . $transactionDetails['debit'] . '" required><br>';
-    echo '  <label for="credit">Credit:</label>';
-    echo '  <input type="text" id="credit" name="credit" value="' . $transactionDetails['credit'] . '" required><br>';
-    echo '  <br><br>';
-    echo '  <button type="submit">Update Transaction</button>';
-    echo '</form>';
-
-    // Link to go back to edit_transactions.php
-    echo '<br><br>';
-    echo '<button onclick="location.href=\'edit_transactions.php\'">Back to Edit Transactions</button>';
+    ?>
+    <?php include 'header.php'; ?>
+    <div class="container">
+        <h2 class="text-center mp-4">Update Transaction</h2>
+        <form action="update_transaction.php" method="post" class="mx-auto" style="max-width: 500px;">
+            <input type="hidden" name="transaction_id" value="<?php echo $transactionDetails['transaction_id']; ?>">
+            <div class="form-group">
+                <label for="description">Description:</label>
+                <input type="text" id="description" name="description" value="<?php echo $transactionDetails['description']; ?>" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="debit">Debit:</label>
+                <input type="text" id="debit" name="debit" value="<?php echo $transactionDetails['debit']; ?>" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="credit">Credit:</label>
+                <input type="text" id="credit" name="credit" value="<?php echo $transactionDetails['credit']; ?>" class="form-control" required>
+            </div>
+            <br><br>
+            <button type="submit" class="btn btn-primary btn-block">Update Transaction</button>
+        </form>
+        <br><br>
+        <button onclick="location.href='edit_transactions.php'" class="btn btn-secondary btn-block">Back to Edit Transactions</button>
+    </div>
+    <?php
+    exit;
 }
 
+echo $message;
+
+//include footer
+include 'footer.php';
 ?>

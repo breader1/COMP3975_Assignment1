@@ -7,7 +7,7 @@ include 'db_params.php'; // Include your database connection code
 
 // Check if the admin is logged in
 if (!isset($_SESSION['admin'])) {
-    echo "Invalid admin credentials.";
+    echo '<div class="alert alert-danger" role="alert">Invalid admin credentials.</div>';
     exit();
 }
 
@@ -19,9 +19,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // Validate input (you might want to add more validation)
     if (empty($username) || empty($password)) {
-        echo "Please enter both username and password.";
+        echo '<div class="alert alert-danger" role="alert">Please enter both username and password.</div>';
     } elseif (strlen($username) > 30 || strlen($password) > 30) {
-        echo "Error: Username and password must be 30 characters or less.";
+        echo '<div class="alert alert-danger" role="alert">Error: Username and password must be 30 characters or less.</div>';
     } else {
         // Check if the username already exists
         $checkUserStmt = $usersDb->prepare('SELECT COUNT(*) FROM user WHERE username = :username');
@@ -30,7 +30,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $count = $result->fetchArray(SQLITE3_NUM)[0];
 
         if ($count > 0) {
-            echo "Username already exists. Choose a different username.";
+            echo '<div class="alert alert-danger" role="alert">Username already exists. Choose a different username.</div>';
         } else {
             // Insert user data into the user table
             $insertUserStmt = $usersDb->prepare("INSERT INTO user (username, password, approved) VALUES (:username, :password, 1)");
@@ -38,28 +38,33 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $insertUserStmt->bindParam(':password', $password, SQLITE3_TEXT);
             $insertUserStmt->execute();
 
-            echo "User '$username' added successfully!";
-            echo "<br>redirecting...";
+            echo "<br>";
+            echo '<div class="alert alert-success" role="alert">User \'' . htmlspecialchars($username) . '\' added successfully! <br>redirecting...</div>';
             header("refresh:2;url=edit_users.php");
         }
     }
 }
 
 // Display the form for inserting a new user
-echo '<h2>Insert User</h2>';
-echo '<form action="insert_user.php" method="post">';
-echo '  <label for="username">Username:</label>';
-echo '  <input type="text" id="username" name="username" required><br>';
-echo '  <label for="password">Password:</label>';
-echo '  <input type="password" id="password" name="password" required><br>';
-echo '  <br><br>';
-echo '  <button type="submit">Insert User</button>';
-echo '</form>';
-
-// Link to go back to edit_users.php
-echo '<br><br>';
-echo '<button onclick="location.href=\'edit_users.php\'">Back to Edit Users</button>';
-
+?>
+<div class="container mt-5">
+    <h2>Insert User</h2>
+    <form action="insert_user.php" method="post">
+        <div class="form-group">
+            <label for="username">Username:</label>
+            <input type="text" class="form-control" id="username" name="username" required>
+        </div>
+        <div class="form-group">
+            <label for="password">Password:</label>
+            <input type="password" class="form-control" id="password" name="password" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Insert User</button>
+    </form>
+    <br><br>
+    <button class="btn btn-secondary" onclick="location.href='edit_users.php'">Back to Edit Users</button>
+</div>
+<?php
 // End output buffering and flush the buffer
 ob_end_flush();
 ?>
+<?php include 'footer.php'; ?>
