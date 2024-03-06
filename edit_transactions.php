@@ -1,7 +1,9 @@
 <?php
-ob_start();
 // Include your session check code
 include 'session_check.php';
+
+ob_start();
+
 
 // Include your database connection code
 include 'db_params.php';
