@@ -67,7 +67,7 @@ echo '</form>';
 
 // Link to go back to edit_buckets.php
 echo '<br><br>';
-echo '<button onclick="location.href=\'edit_buckets.php\'" class="btn btn-secondary">Back to Edit Buckets</button>';
+echo '<button onclick="location.href=\'edit_buckets.php\'" class="btn btn-secondary">Back to Buckets</button>';
 echo '</div>'; // Close container
 
 // End output buffering and flush the buffer

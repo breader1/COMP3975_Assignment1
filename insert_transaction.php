@@ -130,7 +130,7 @@
         </form>
 
         <br><br>
-        <button onclick="location.href='edit_transactions.php'" class="btn btn-secondary btn-block">Back to Edit Transactions</button>
+        <button onclick="location.href='edit_transactions.php'" class="btn btn-secondary btn-block">Back to Transactions</button>
 
         <?php echo $message; ?>
     </div>

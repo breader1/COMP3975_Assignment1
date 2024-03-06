@@ -51,7 +51,7 @@ $result = $getAllTransactionsStmt->execute();
 
 // Start building the table
 echo '<div class="container mt-4">';
-echo '<h2>Edit Transactions</h2>';
+echo '<h2>Transactions</h2>';
 
 // Insert Transaction button that redirects to insert_transaction.php
 echo '<button onclick="location.href=\'insert_transaction.php\'" class="btn btn-primary">Insert Transaction</button>';

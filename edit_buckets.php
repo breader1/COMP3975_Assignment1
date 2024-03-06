@@ -93,7 +93,7 @@ $result = $getAllFiltersStmt->execute();
 
 // Start building the table
 echo '<div class="container mt-5">';
-echo '<h2>Edit Buckets</h2>';
+echo '<h2>Buckets</h2>';
 
 // Insert Filter button that redirects to insert_filter.php
 echo '<button class="btn btn-primary" onclick="location.href=\'insert_bucket.php\'">Insert Bucket</button>';

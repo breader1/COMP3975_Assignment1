@@ -63,7 +63,7 @@ $role = isset($_SESSION['admin']) ? 'admin' : 'user';
             text-align: center;
         }
 
-        /* Style for the 'Back to Edit Transactions' button */
+        /* Style for the 'Back to Transactions' button */
         .btn-secondary.btn-block {
             background-color: #6c757d; /* Same color as the banner */
             color: white;
@@ -81,9 +81,16 @@ $role = isset($_SESSION['admin']) ? 'admin' : 'user';
         <?php if ($role === 'admin'): ?>
             <div class="nav-buttons">
                 <button class="btn btn-primary mr-2" onclick="location.href='admin.php'">Admin</button>
-                <button class="btn btn-primary mr-2" onclick="location.href='edit_users.php'">Edit Users</button>
-                <button class="btn btn-primary mr-2" onclick="location.href='edit_buckets.php'">Edit Buckets</button>
-                <button class="btn btn-primary" onclick="location.href='edit_transactions.php'">Edit Transactions</button>
+                <button class="btn btn-primary mr-2" onclick="location.href='edit_users.php'">View Users</button>
+                <button class="btn btn-primary mr-2" onclick="location.href='edit_buckets.php'">View Buckets</button>
+                <button class="btn btn-primary mr-2" onclick="location.href='edit_transactions.php'">View Transactions</button>
+                <button class="btn btn-primary" onclick="location.href='upload.php'">Home</button>
+            </div>
+            </div>
+        <?php else: ?>
+            <div class="nav-buttons">
+                <button class="btn btn-primary mr-2" onclick="location.href='edit_transactions.php'">View Transactions</button>
+                <button class="btn btn-primary" onclick="location.href='upload.php'">Home</button>
             </div>
         <?php endif; ?>
     </div>

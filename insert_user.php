@@ -61,7 +61,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <button type="submit" class="btn btn-primary">Insert User</button>
     </form>
     <br><br>
-    <button class="btn btn-secondary" onclick="location.href='edit_users.php'">Back to Edit Users</button>
+    <button class="btn btn-secondary" onclick="location.href='edit_users.php'">Back to Users</button>
 </div>
 <?php
 // End output buffering and flush the buffer

@@ -134,7 +134,7 @@ if (isset($_GET['transaction_id'])) {
             <button type="submit" class="btn btn-primary btn-block">Update Transaction</button>
         </form>
         <br><br>
-        <button onclick="location.href='edit_transactions.php'" class="btn btn-secondary btn-block">Back to Edit Transactions</button>
+        <button onclick="location.href='edit_transactions.php'" class="btn btn-secondary btn-block">Back to Transactions</button>
     </div>
     <?php
     exit;
