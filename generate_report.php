@@ -1,6 +1,6 @@
 <?php
 ob_start();
-include 'header.php'; // Include your header file
+//include 'header.php'; // Include your header file
 include 'session_check.php'; // Include your session check code
 include 'db_params.php'; // Include your database connection code
 ?>

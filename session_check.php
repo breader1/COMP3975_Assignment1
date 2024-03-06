@@ -18,7 +18,7 @@ $role = isset($_SESSION['admin']) ? 'admin' : 'user';
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Welcome</title>
+    <title>Assignment 1</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <style>
         .username {
@@ -98,5 +98,3 @@ $role = isset($_SESSION['admin']) ? 'admin' : 'user';
     <!-- Rest of the body content will go here, including your forms and other UI elements -->
 </body>
 </html>
-
-<?php ob_end_flush(); ?>
