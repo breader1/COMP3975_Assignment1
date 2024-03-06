@@ -100,10 +100,8 @@ echo '</table>';
 
 echo $message;
 
-// End output buffering and flush the buffer
-ob_end_flush();
-
 // Include your footer code
 include 'footer.php';
 echo '</div>'; // Close the container
+ob_end_flush();
 ?>
