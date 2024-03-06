@@ -1,7 +1,7 @@
     <?php
     ob_start();
     // Include your session check code
-    // include 'session_check.php';
+    include 'session_check.php';
 
     // Include your database connection code
     include 'db_params.php';
@@ -104,10 +104,8 @@
             }
         }
     }
-
+    ob_end_flush();
     ?>
-    <?php include 'header.php'; ?>
-
     <div class="container">
         <h2 class="text-center mp-4">Insert Transaction</h2>
         <form action="insert_transaction.php" method="post" class="mx-auto" style="max-width: 500px;"> <!-- Adjusted width here -->
@@ -136,4 +134,3 @@
         <?php echo $message; ?>
     </div>
     <?php include 'footer.php'; ?>
-    <?php ob_end_flush(); ?>

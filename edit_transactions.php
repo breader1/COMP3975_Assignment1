@@ -100,5 +100,5 @@ echo $message;
 // Include your footer code
 include 'footer.php';
 echo '</div>'; // Close the container
+ob_end_flush();
 ?>
-<?php ob_end_flush(); ?>
