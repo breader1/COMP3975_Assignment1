@@ -7,7 +7,7 @@ include 'session_check.php';
 include 'db_params.php';
 
 // Include your header code
-include 'header.php';
+//include 'header.php';
 
 // Include your footer code
 include 'footer.php';

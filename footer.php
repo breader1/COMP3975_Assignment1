@@ -1,4 +1,4 @@
-
+<?php ob_start(); ?>
 <style>
     footer {
         height: 90px; 
@@ -17,4 +17,4 @@
         </div>
     </div>
 </footer>
-
+<?php ob_end_flush(); ?>

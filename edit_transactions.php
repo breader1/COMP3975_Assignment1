@@ -6,9 +6,6 @@ include 'session_check.php';
 // Include your database connection code
 include 'db_params.php';
 
-// Include your header code
-include 'header.php';
-
 // Initialize the message variable
 $message = "";
 

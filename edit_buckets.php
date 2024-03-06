@@ -4,7 +4,7 @@ ob_start();
 
 include 'session_check.php'; // Include your session check code
 include 'db_params.php'; // Include your database connection code
-include 'header.php'; // Include your header code
+//include 'header.php'; // Include your header code
 include 'footer.php'; // Include your footer code
 
 // Check if the admin is logged in
